@@ -7,15 +7,18 @@ var express            = require("express"),
  LocalStrategy         = require("passport-local"),
  passportLocalMongoose = require("passport-local-mongoose");
 
-mongoose.connect("mongodb://mongo:27018/Samp_data");
-// mongoose.connect("mongodb://localhost/Samp_data");
+mongoose.connect("mongodb://mongo:27017/data_sample", { useNewUrlParser: true }).
+catch(error => {console.log(error)});
+
+// mongoose.connect("mongodb://localhost/data_sample");
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-//app.use(express.static('public'));
+app.use(express.static('public'));
+
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
     secret: "once again Rusty wins cutest dogs!",
